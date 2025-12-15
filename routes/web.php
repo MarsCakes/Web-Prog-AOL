@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RouteController;
 
-Route::get('/', function () {
-    return view('homepage');
-});
+Route::get('/', [RouteController::class, 'index'])->name('route.homepage');
