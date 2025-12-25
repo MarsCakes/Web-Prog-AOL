@@ -70,3 +70,5 @@ Route::middleware(['auth', 'admin'])->group(function () {
 // Contact
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+
+Route::get('/syaratdanketentuan', [RouteController::class, 'termsandconditions'])->name('syaratdanketentuan');
