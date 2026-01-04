@@ -91,9 +91,9 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-success">
-    <div class="container-fluid">
-      <a class="navbar-brand text-light" href="{{ route('route.homepage') }}">GREENMART</a>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top shadow-sm">
+    <div class="container px-3">
+      <a class="navbar-brand text-light" href="{{ route('route.homepage') }}">GREEN</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -103,10 +103,21 @@
           <li class="nav-item">
             <a class="nav-link active text-light" aria-current="page" href="{{ route('route.homepage') }}">Home</a>
           </li>
+          {{-- <li class="nav-item">
+            <a class="nav-link text-light" href="{{ route('order.create') }}">Pesan</a>
+          </li> --}}
           <li class="nav-item">
-            <a class="nav-link text-light" href="#">Order</a>
+            <a class="nav-link text-light" href="{{ route('mitra.show') }}">Mitra</a>
           </li>
-
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{{ route('artikel.index') }}">Artikel</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{{ route('pricing.index') }}">Harga</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{{ route('contact.index') }}">Kontak</a>
+          </li>
           <!-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -125,16 +136,67 @@
                         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                     </li> -->
         </ul>
-        <!-- <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-light" type="submit">Search</button>
-                </form> -->
+        @auth
+          <div class="d-flex gap-2 align-items-center">
+            <span class="text-light me-2">Hi, {{ auth()->user()->name }}</span>
+            @if(auth()->user()->role === 'admin')
+              <a href="{{ route('admin') }}" class="btn btn-light btn-sm">Admin Panel</a>
+            @else
+              <a href="{{ route('dashboard') }}" class="btn btn-light btn-sm">Dashboard</a>
+            @endif
+            <form method="POST" action="{{ route('logout') }}" class="d-inline">
+              @csrf
+              <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
+            </form>
+          </div>
+        @else
+          <div class="d-flex gap-2">
+            <a href="{{ route('login') }}" class="btn btn-outline-light btn-sm">Login</a>
+            <a href="{{ route('register') }}" class="btn btn-light btn-sm">Register</a>
+          </div>
+        @endauth
       </div>
     </div>
   </nav>
   <main>
     @yield('content')
   </main>
+  <footer class="bg-dark text-light py-4 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 mb-3">
+          <h6 class="fw-bold">GREEN</h6>
+          <p class="small text-muted">Solusi penjemputan sampah ramah lingkungan untuk kehidupan berkelanjutan.</p>
+        </div>
+        <div class="col-md-3 mb-3">
+          <h6 class="fw-bold">Menu</h6>
+          <ul class="list-unstyled small">
+            <li><a href="{{ route('route.homepage') }}" class="text-light text-decoration-none">Home</a></li>
+            <li><a href="{{ route('mitra.show') }}" class="text-light text-decoration-none">Mitra</a></li>
+            <li><a href="{{ route('artikel.index') }}" class="text-light text-decoration-none">Artikel</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3 mb-3">
+          <h6 class="fw-bold">Layanan</h6>
+          <ul class="list-unstyled small">
+            <li><a href="{{ route('pricing.index') }}" class="text-light text-decoration-none">Harga</a></li>
+            <li><a href="{{ route('contact.index') }}" class="text-light text-decoration-none">Kontak</a></li>
+            <li><a href="{{ route('syaratdanketentuan') }}" class="text-light text-decoration-none">Syarat dan
+                Ketentuan</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3 mb-3">
+          <h6 class="fw-bold">Hubungi Kami</h6>
+          <p class="small text-muted">Email: hello@green.local</p>
+          <p class="small text-muted">WA: +62 812-1234-5678</p>
+        </div>
+      </div>
+      <hr class="bg-secondary">
+      <div class="text-center small text-muted">
+        &copy; {{ date('Y') }} GREEN. Semua hak dilindungi.
+      </div>
+    </div>
+  </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
