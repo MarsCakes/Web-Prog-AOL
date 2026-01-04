@@ -10,4 +10,10 @@ class RouteController extends Controller
     {
         return view('homepage');
     }
+
+    public function termsandconditions()
+    {
+        return view('termsandconditions');
+    }
+
 }
