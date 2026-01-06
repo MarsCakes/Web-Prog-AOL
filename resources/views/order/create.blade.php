@@ -5,13 +5,10 @@
 @section('content')
 <section class="py-5">
     <div class="container">
-
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="h3 fw-bold text-success mb-0">Pesan Penjemputan</h1>
             @auth
-                <a href="{{ route('dashboard') }}" class="btn btn-outline-success">
-                    ← Kembali ke Dashboard
-                </a>
+                <a href="{{ route('dashboard') }}" class="btn btn-outline-success">← Kembali ke Dashboard</a>
             @endauth
         </div>
 
@@ -66,8 +63,8 @@
                 <label class="form-label fw-bold">Alamat Lengkap</label>
                 <textarea
                     name="address"
-                    rows="3"
                     class="form-control"
+                    rows="3"
                     required
                 >{{ old('address') }}</textarea>
                 <div class="form-text">
@@ -98,17 +95,19 @@
             </div>
 
             <div class="col-md-6">
-                <label class="form-label fw-bold">Kategori Sampah Barang</label>
-                <select name="pricing_category_id" class="form-select" required>
+                <label class="form-label fw-bold">Kategori Sampah atau Barang</label>
+                <select
+                    name="pricing_category_id"
+                    class="form-select"
+                    required
+                >
                     <option value="" disabled selected>Pilih kategori</option>
                     @foreach ($categories as $cat)
                         <option
                             value="{{ $cat->id }}"
                             @selected(old('pricing_category_id') == $cat->id)
                         >
-                            {{ $cat->name }}
-                            ({{ $cat->unit }})
-                            - Rp {{ number_format($cat->price,0,',','.') }}
+                            {{ $cat->name }} ({{ $cat->unit }}) - Rp {{ number_format($cat->price, 0, ',', '.') }}
                         </option>
                     @endforeach
                 </select>
@@ -119,8 +118,8 @@
                 <input
                     type="file"
                     name="photo"
-                    accept="image/*"
                     class="form-control"
+                    accept="image/*"
                 >
             </div>
 
@@ -137,7 +136,11 @@
 
             <div class="col-md-6">
                 <label class="form-label fw-bold">Metode Layanan</label>
-                <select name="service_method" class="form-select" required>
+                <select
+                    name="service_method"
+                    class="form-select"
+                    required
+                >
                     <option value="free" @selected(old('service_method') === 'free')>
                         Gratis
                     </option>
@@ -157,8 +160,8 @@
                     </div>
 
                     <button
-                        id="submitBtn"
                         type="submit"
+                        id="submitBtn"
                         class="btn btn-success"
                         style="background: linear-gradient(135deg, #228B22, #1c751c); border: none;"
                     >
@@ -166,40 +169,38 @@
                     </button>
                 </div>
             </div>
-
         </form>
     </div>
 </section>
 
 <script>
 (function () {
-    const select = document.querySelector('select[name="pricing_category_id"]');
-    const est = document.getElementById('estPrice');
-    const btn = document.getElementById('submitBtn');
-    const form = document.getElementById('orderForm');
+    const select = document.querySelector('select[name="pricing_category_id"]')
+    const est = document.getElementById('estPrice')
+    const btn = document.getElementById('submitBtn')
+    const form = document.getElementById('orderForm')
 
     const prices = {
         @foreach ($categories as $cat)
             {{ $cat->id }}: {{ (int) $cat->price }},
         @endforeach
-    };
+    }
 
     function fmt(n) {
-        return new Intl.NumberFormat('id-ID').format(n || 0);
+        return new Intl.NumberFormat('id-ID').format(n || 0)
     }
 
     if (select) {
-        select.addEventListener('change', () => {
-            est.textContent = 'Rp ' + fmt(prices[select.value] || 0);
-        });
+        select.addEventListener('change', function () {
+            est.textContent = 'Rp ' + fmt(prices[select.value] || 0)
+        })
     }
 
     if (form && btn) {
-        form.addEventListener('submit', () => {
-            btn.disabled = true;
-            btn.innerHTML =
-                '<span class="spinner-border spinner-border-sm me-2"></span>Mengirim...';
-        });
+        form.addEventListener('submit', function () {
+            btn.disabled = true
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Mengirim...'
+        })
     }
 })();
 </script>
