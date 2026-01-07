@@ -41,7 +41,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
@@ -59,6 +59,18 @@ return [
             'throw' => false,
             'report' => false,
         ],
+
+        'r2' => [
+            'driver' => 's3',
+            'key' => env('2b0646316c89d7317e7e625b3787581d'),
+            'secret' => env('c27d2c6e2be241c4b3888fcc96fde2dc22f90911cfeec64600d3a1ce6cb90b66'),
+            'region' => env('AWS_DEFAULT_REGION'),
+            'bucket' => env('orderpics'),
+            'endpoint' => env('https://dbde7f441ced3327addfd6f057a48065.r2.cloudflarestorage.com'),
+            'url' => env('https://pub-ff6254bafe46426f89c26ecf902084dd.r2.dev'),
+            'use_path_style_endpoint' => true,
+        ],
+
 
     ],
 
