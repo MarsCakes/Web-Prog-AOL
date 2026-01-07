@@ -61,14 +61,16 @@ return [
         ],
 
         'r2' => [
-            'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION', 'auto'),
-            'bucket' => env('AWS_BUCKET'),
-            'endpoint' => env('AWS_ENDPOINT'),
-            'url' => env('AWS_URL'),
-            'use_path_style_endpoint' => true,
+            'r2' => [
+                'driver' => 's3',
+                'key' => $_ENV['AWS_ACCESS_KEY_ID'] ?? env('AWS_ACCESS_KEY_ID'),
+                'secret' => $_ENV['AWS_SECRET_ACCESS_KEY'] ?? env('AWS_SECRET_ACCESS_KEY'),
+                'region' => 'auto',
+                'bucket' => $_ENV['AWS_BUCKET'] ?? env('AWS_BUCKET') ?? 'orderpics',
+                'endpoint' => $_ENV['AWS_ENDPOINT'] ?? env('AWS_ENDPOINT'),
+                'url' => $_ENV['AWS_URL'] ?? env('AWS_URL'),
+                'use_path_style_endpoint' => true,
+            ],
         ],
 
 
