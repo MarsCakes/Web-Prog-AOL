@@ -38,11 +38,7 @@ class OrderController extends Controller
 
     $path = null;
     if ($request->hasFile('photo')) {
-      $path = $request->file('photo')->store('orders', [
-        'disk' => 'local',
-        'root' => sys_get_temp_dir(),
-      ]);
-
+      $path = $request->file('photo')->store('orders', 'public');
     }
 
     $category = PricingCategory::find($validated['pricing_category_id']);
