@@ -38,7 +38,7 @@ class OrderController extends Controller
 
     $path = null;
     if ($request->hasFile('photo')) {
-      $path = $request->file('photo')->store('orders', 'public');
+      $path = $request->file('photo')->store('orders', 'r2');
     }
 
     $category = PricingCategory::find($validated['pricing_category_id']);
