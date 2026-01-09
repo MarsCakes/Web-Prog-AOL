@@ -13,6 +13,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TrackingController;
 use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\AdminPricingController;
+use App\Http\Controllers\MitraController;
 
 Route::get('/', [RouteController::class, 'index'])->name('home');
 Route::get('/', [RouteController::class, 'index'])->name('route.homepage');
@@ -34,8 +35,11 @@ Route::middleware('auth')->group(function () {
 });
 
 // Mitra (Daftar Mitra/Driver)
-Route::get('/mitra', [PartnerController::class, 'show'])->name('mitra.show');
-Route::post('/mitra', [PartnerController::class, 'submit'])->name('mitra.submit');
+Route::get('/mitra/daftar', [PartnerController::class, 'show'])
+    ->name('mitra.show');
+
+Route::post('/mitra/daftar', [PartnerController::class, 'submit'])
+    ->name('mitra.submit');
 
 // Artikel / Edukasi
 Route::get('/artikel', [ArticleController::class, 'index'])->name('artikel.index');
@@ -47,6 +51,16 @@ Route::get('/pricing', [PricingController::class, 'index'])->name('pricing.index
 // Orders (Create/Store)
 Route::get('/order', [OrderController::class, 'create'])->name('order.create');
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+
+// mitra approval
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/mitra', [MitraController::class, 'index'])
+        ->name('mitra.index');
+
+    Route::post('/admin/mitra/{id}/approve', [MitraController::class, 'approve'])
+        ->name('mitra.approve');
+});
+
 
 // Tracking
 Route::get('/track', [TrackingController::class, 'index'])->name('track.index');
