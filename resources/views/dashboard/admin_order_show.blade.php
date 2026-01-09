@@ -25,7 +25,8 @@
           <p class="mb-1"><span class="text-muted small">Jadwal:</span> <strong>{{ $order->scheduled_at->format('d M Y H:i') }}</strong></p>
           <p class="mb-3"><span class="text-muted small">Kategori:</span> <strong>{{ $order->category->name }}</strong></p>
           @if($order->photo_path)
-            <img src="{{ Storage::url($order->photo_path) }}" class="img-fluid rounded mb-2">
+            <!-- <img src="{{ Storage::url($order->photo_path) }}" class="img-fluid rounded mb-2"> -->
+            <img src="{{ Storage::disk('r2')->url($order->photo_path) }}" alt="Order photo" class="img-fluid rounded mb-2">
           @endif
         </div></div>
 

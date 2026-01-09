@@ -41,7 +41,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
@@ -59,7 +59,16 @@ return [
             'throw' => false,
             'report' => false,
         ],
-
+        'r2' => [
+            'driver' => 's3',
+            'key' => $_ENV['AWS_ACCESS_KEY_ID'] ?? env('AWS_ACCESS_KEY_ID'),
+            'secret' => $_ENV['AWS_SECRET_ACCESS_KEY'] ?? env('AWS_SECRET_ACCESS_KEY'),
+            'region' => 'auto',
+            'bucket' => $_ENV['AWS_BUCKET'] ?? env('AWS_BUCKET') ?? 'orderpics',
+            'endpoint' => $_ENV['AWS_ENDPOINT'] ?? env('AWS_ENDPOINT'),
+            'url' => $_ENV['AWS_URL'] ?? env('AWS_URL'),
+            'use_path_style_endpoint' => true,
+        ],
     ],
 
     /*
