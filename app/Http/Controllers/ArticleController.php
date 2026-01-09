@@ -9,9 +9,10 @@ class ArticleController extends Controller
 {
   public function index()
   {
-    $articles = Article::where('published_at', '<=', now())
-      ->orderBy('published_at', 'desc')
-      ->get();
+    // $articles = Article::where('published_at', '<=', now())
+    //   ->orderBy('published_at', 'desc')
+    //   ->get();
+    $articles = Article::orderBy('published_at', 'desc')->get();
     return view('artikel.index', compact('articles'));
   }
 
