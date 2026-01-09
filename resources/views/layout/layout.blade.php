@@ -107,8 +107,22 @@
             <a class="nav-link text-light" href="{{ route('order.create') }}">Pesan</a>
           </li> --}}
           <li class="nav-item">
-            <a class="nav-link text-light" href="{{ route('mitra.show') }}">Mitra</a>
-          </li>
+    @auth
+        @if(auth()->user()->role === 'admin')
+            <a class="nav-link text-light" href="{{ route('mitra.index') }}">
+                Mitra
+            </a>
+        @else
+            <a class="nav-link text-light" href="{{ route('mitra.show') }}">
+                Mitra
+            </a>
+        @endif
+    @else
+        <a class="nav-link text-light" href="{{ route('mitra.show') }}">
+            Mitra
+        </a>
+    @endauth
+</li>
           <li class="nav-item">
             <a class="nav-link text-light" href="{{ route('artikel.index') }}">Artikel</a>
           </li>

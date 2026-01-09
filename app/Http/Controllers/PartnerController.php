@@ -9,7 +9,7 @@ class PartnerController extends Controller
 {
   public function show()
   {
-    return view('mitra');
+    return view('Mitra');
   }
 
   public function submit(Request $request)

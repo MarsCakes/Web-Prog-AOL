@@ -313,7 +313,7 @@
         @foreach($mitras as $mitra)
         <tr>
           <td>{{ $mitra->id }}</td>
-          <td>{{ $mitra->nama_mitra }}</td>
+          <td>{{ $mitra->name }}</td>
           <td>{{ $mitra->email }}</td>
           <td>
             <span class="badge {{ $mitra->status == 'approved' ? 'bg-success' : 'bg-warning' }}">
@@ -322,7 +322,7 @@
           </td>
           <td>
             @if($mitra->status === 'pending')
-              <form method="POST" action="{{ route('admin.mitra.approve', $mitra->id) }}">
+              <form method="POST" action="{{ route('mitra.approve', $mitra->id) }}">
                 @csrf
                 <button type="submit" class="btn btn-success btn-sm">
                   Approve

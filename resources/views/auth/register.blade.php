@@ -56,7 +56,7 @@
               <div class="form-check mb-3">
                 <input class="form-check-input @error('agree') is-invalid @enderror" type="checkbox" name="agree" id="agree">
                 <label class="form-check-label" for="agree">
-                  Saya setuju dengan <a href="#" class="link-success">syarat dan ketentuan</a>
+                  Saya setuju dengan <a href="{{ route('syaratdanketentuan') }}" class="link-success">syarat dan ketentuan</a>
                 </label>
                 @error('agree')<div class="invalid-feedback">{{ $message }}</div>@enderror
               </div>
