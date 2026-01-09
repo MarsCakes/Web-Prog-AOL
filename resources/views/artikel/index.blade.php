@@ -41,10 +41,12 @@
           <div class="col-md-6 col-lg-4">
             <div class="card h-100 shadow-sm card-raise">
               <div class="ratio ratio-16x9">
-                <img src="{{ Storage::disk('r2')->url($a->image) }}"
+                <img
+                  src="{{ $a->image
+                        ? Storage::disk('r2')->url($a->image)
+                        : 'https://via.placeholder.com/600x338?text=Artikel' }}"
                   class="card-img-top object-fit-cover"
-                  alt="{{ $a->title }}"
-                  onerror="this.src='https://via.placeholder.com/600x338?text=Artikel';">
+                  alt="{{ $a->title }}">
               </div>
               <div class="card-body d-flex flex-column">
                 <div class="d-flex align-items-center justify-content-between mb-2">
