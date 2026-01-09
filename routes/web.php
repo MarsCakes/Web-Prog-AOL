@@ -42,6 +42,13 @@ Route::post('/mitra/daftar', [PartnerController::class, 'submit'])
     ->name('mitra.submit');
 
 // Artikel / Edukasi
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/artikel/create', [ArticleController::class, 'create'])
+        ->name('artikel.create');
+
+    Route::post('/artikel', [ArticleController::class, 'store'])
+        ->name('artikel.store');
+});
 Route::get('/artikel', [ArticleController::class, 'index'])->name('artikel.index');
 Route::get('/artikel/{slug}', [ArticleController::class, 'show'])->name('artikel.show');
 

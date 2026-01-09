@@ -34,8 +34,9 @@
               <p class="mb-3"><span class="text-muted small">Kategori:</span>
                 <strong>{{ $order->category->name }}</strong></p>
               @if($order->photo_path)
-                <img src="{{ Storage::url($order->photo_path) }}" class="img-fluid rounded mb-2">
-                
+                <!-- <img src="{{ Storage::url($order->photo_path) }}" class="img-fluid rounded mb-2"> -->
+                <img src="{{ Storage::disk('r2')->url($order->photo_path) }}" alt="Order photo"
+                  class="img-fluid rounded mb-2">
               @endif
             </div>
           </div>

@@ -27,12 +27,23 @@
 
   <section class="py-5">
     <div class="container">
+      @auth
+        @if(auth()->user()->role === 'admin')
+      <div class="mb-4">
+          <a href="{{ route('artikel.create') }}" class="btn btn-success">
+            + Tambah Artikel
+          </a>
+        </div>
+        @endif
+      @endauth
       <div class="row g-4">
         @foreach($articles as $a)
           <div class="col-md-6 col-lg-4">
             <div class="card h-100 shadow-sm card-raise">
               <div class="ratio ratio-16x9">
-                <img src="{{ $a->image }}" class="card-img-top object-fit-cover" alt="{{ $a->title }}"
+                <img src="{{ Storage::disk('r2')->url($a->image) }}"
+                  class="card-img-top object-fit-cover"
+                  alt="{{ $a->title }}"
                   onerror="this.src='https://via.placeholder.com/600x338?text=Artikel';">
               </div>
               <div class="card-body d-flex flex-column">
@@ -42,8 +53,9 @@
                 </div>
                 <h3 class="h5 section-title">{{ $a->title }}</h3>
                 <p class="text-muted flex-grow-1">{{ $a->excerpt }}</p>
-                <a href="{{ route('artikel.show', ['slug' => $a->slug]) }}" class="stretched-link link-success">Baca
-                  selengkapnya</a>
+                <a href="{{ route('artikel.show', $a) }}" class="stretched-link link-success">
+                    Baca selengkapnya
+                </a>
               </div>
             </div>
           </div>
@@ -51,4 +63,5 @@
       </div>
     </div>
   </section>
+
 @endsection
