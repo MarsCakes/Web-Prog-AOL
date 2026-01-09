@@ -12,7 +12,7 @@ class AdminOrderController extends Controller
     public function index()
     {
         return view('dashboard.admin_orders', [
-            'orders'  => $this->getOrders(),
+            'orders' => $this->getOrders(),
             'drivers' => $this->getDrivers(),
         ]);
     }
@@ -27,7 +27,7 @@ class AdminOrderController extends Controller
         ]);
 
         return view('dashboard.admin_order_show', [
-            'order'   => $order,
+            'order' => $order,
             'drivers' => $this->getDrivers(),
         ]);
     }
@@ -82,7 +82,7 @@ class AdminOrderController extends Controller
 
     private function getDrivers()
     {
-        return User::where('role', 'partner')
+        return User::where('role', 'driver')
             ->orderBy('name')
             ->get();
     }

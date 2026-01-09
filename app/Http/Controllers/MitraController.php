@@ -29,12 +29,12 @@ class MitraController extends Controller
 
             if ($user) {
                 $user->update([
-                    'role' => 'mitra'
+                    'role' => 'driver'
                 ]);
             }
         });
 
-        return back()->with('success', 'Mitra approved & user role updated to mitra');
+        return back()->with('success', 'Mitra approved & user role updated to driver');
     }
 
 
