@@ -42,6 +42,13 @@
         </div>
       </div>
     </div>
+    
+    <li class="nav-item">
+  <a href="{{ route('mitra.index') }}" class="nav-link">
+    Mitra List
+  </a>
+</li>
+
 
     <!-- Admin Menu -->
     <div class="row g-3 mb-5">

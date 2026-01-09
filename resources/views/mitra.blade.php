@@ -285,4 +285,59 @@
       </div>
     </div>
   </section>
+
+  @auth
+@if(auth()->user()->role === 'admin')
+<section class="py-5 bg-white">
+  <div class="container">
+    <hr>
+    <h3 class="fw-bold text-success mb-4">Daftar Mitra</h3>
+
+    @if(session('success'))
+      <div class="alert alert-success">
+        {{ session('success') }}
+      </div>
+    @endif
+
+    <table class="table table-bordered">
+      <thead class="table-success">
+        <tr>
+          <th>ID</th>
+          <th>Nama Mitra</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($mitras as $mitra)
+        <tr>
+          <td>{{ $mitra->id }}</td>
+          <td>{{ $mitra->nama_mitra }}</td>
+          <td>{{ $mitra->email }}</td>
+          <td>
+            <span class="badge {{ $mitra->status == 'approved' ? 'bg-success' : 'bg-warning' }}">
+              {{ $mitra->status }}
+            </span>
+          </td>
+          <td>
+            @if($mitra->status === 'pending')
+              <form method="POST" action="{{ route('admin.mitra.approve', $mitra->id) }}">
+                @csrf
+                <button type="submit" class="btn btn-success btn-sm">
+                  Approve
+                </button>
+              </form>
+            @else
+              <span class="text-muted">Approved</span>
+            @endif
+          </td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
+  </div>
+</section>
+@endif
+  @endauth
 @endsection
